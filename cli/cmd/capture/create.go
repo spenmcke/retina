@@ -186,6 +186,9 @@ func createCaptureF(kubeClient kubernetes.Interface) (*retinav1alpha1.Capture, e
 				CaptureOption:   retinav1alpha1.CaptureOption{},
 			},
 		},
+		Status: retinav1alpha1.CaptureStatus{
+			RequestTime: metav1.NewTime(time.Now().UTC()),
+		},
 	}
 
 	if duration != 0 {

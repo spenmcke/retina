@@ -57,6 +57,11 @@ func (cm *CaptureManager) CaptureNetwork(sigChan <-chan os.Signal) (string, erro
 		return "", err
 	}
 
+	captureRequestTime := cm.captureRequestTime()
+	if err != nil {
+		return "", err
+	}
+
 	if err := cm.networkCaptureProvider.CaptureNetworkPacket(captureFilter, captureDuration, captureMaxSizeMB, sigChan); err != nil {
 		return "", err
 	}
@@ -135,6 +140,14 @@ func (cm *CaptureManager) captureMaxSizeMB() (int, error) {
 		return 0, nil
 	}
 	return strconv.Atoi(captureMaxSizeMBStr)
+}
+
+func (cm *CaptureManager) captureRequestTime() string {
+	captureRequestTime := os.Getenv(captureConstants.CaptureRequestTimeEnvKey)
+	if len(captureRequestTime) == 0 {
+		return ""
+	}
+	return captureRequestTime
 }
 
 func (cm *CaptureManager) OutputCapture(srcDir string) error {

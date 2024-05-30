@@ -38,8 +38,8 @@ func NewNetworkCaptureProvider(logger *log.ZapLogger) NetworkCaptureProviderInte
 	}
 }
 
-func (ncp *NetworkCaptureProvider) Setup(captureName, nodeHostname string) (string, error) {
-	captureFolderDir, err := ncp.NetworkCaptureProviderCommon.Setup(captureName, nodeHostname)
+func (ncp *NetworkCaptureProvider) Setup(captureName, nodeHostname, requestTime string) (string, error) {
+	captureFolderDir, err := ncp.NetworkCaptureProviderCommon.Setup(captureName, nodeHostname, requestTime)
 	if err != nil {
 		return "", err
 	}
@@ -51,8 +51,8 @@ func (ncp *NetworkCaptureProvider) Setup(captureName, nodeHostname string) (stri
 	return ncp.TmpCaptureDir, nil
 }
 
-func (ncp *NetworkCaptureProvider) CaptureNetworkPacket(filter string, duration, maxSizeMB int, sigChan <-chan os.Signal) error {
-	captureFileName := ncp.NetworkCaptureProviderCommon.CaptureNodetimestampName(ncp.CaptureName, ncp.NodeHostName)
+func (ncp *NetworkCaptureProvider) CaptureNetworkPacket(filter string, duration, maxSizeMB int, sigChan <-chan os.Signal, requestTime string) error {
+	captureFileName := ncp.NetworkCaptureProviderCommon.CaptureNodetimestampName(ncp.CaptureName, ncp.NodeHostName, requestTime)
 	captureFileName = fmt.Sprintf("%s.pcap", captureFileName)
 	captureFilePath := filepath.Join(ncp.TmpCaptureDir, captureFileName)
 

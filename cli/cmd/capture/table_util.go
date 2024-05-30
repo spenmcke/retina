@@ -7,6 +7,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"os/exec"
 	"sort"
 	"strings"
 	"text/tabwriter"
@@ -103,4 +104,17 @@ func printCaptureResult(captureJobs []batchv1.Job) {
 	}
 	w.Flush()
 	fmt.Println()
+}
+
+func printCaptureNames(captureJobs []batchv1.Job) {
+	// capture name
+	// node hostname
+	var com := {"kubectl", "--namespace", namespace, "--selector", nodeSelectors, "|", "grep", "-F", strings.Replace(nodeNames, ",", " ", -1)}
+	exec.Command()
+	// timestamp
+	for _, job := range captureJobs {
+		for _, env := range job.Spec.Template.Spec.Containers[0].Env {
+			if 
+		}
+	}
 }

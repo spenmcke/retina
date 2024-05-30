@@ -27,6 +27,10 @@ type CaptureStatus struct {
 	// +listMapKey=type
 	Conditions []metav1.Condition `json:"conditions,omitempty" patchStrategy:"merge" patchMergeKey:"type"`
 
+	// Represents time when the CLI requested the capture
+	// +required
+	RequestTime metav1.Time `json:"requestTime" protobuf:"bytes,2,name=requestTime"`
+
 	// Represents time when the Capture controller started processing a job.
 	// +optional
 	StartTime *metav1.Time `json:"startTime,omitempty" protobuf:"bytes,2,opt,name=startTime"`

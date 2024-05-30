@@ -911,6 +911,8 @@ func (translator *CaptureToPodTranslator) ObtainCaptureJobPodEnv(capture retinav
 	}
 	jobPodEnv[captureConstants.IncludeMetadataEnvKey] = strconv.FormatBool(capture.Spec.CaptureConfiguration.IncludeMetadata)
 
+	jobPodEnv[captureConstants.CaptureRequestTimeEnvKey] = strings.Replace(capture.Status.RequestTime.Time.Format("2006#01#02#03#04#05UTC"), "#", "", -1)
+
 	// TODO: more env to be added
 	return jobPodEnv, nil
 }

@@ -8,8 +8,6 @@ import (
 	"os"
 	"os/exec"
 	"path/filepath"
-	"strings"
-	"time"
 
 	"github.com/microsoft/retina/pkg/log"
 	"go.uber.org/zap"
@@ -19,9 +17,8 @@ import (
 const captureLabelFolderName = "retina-capture" //nolint:unused
 
 // captureNodetimestampName returns a unique name with the current UTC timestamp and provided variables.
-func (ncpc *NetworkCaptureProviderCommon) CaptureNodetimestampName(captureName, nodeHostname string) string {
-	formatedUTCTime := strings.Replace(time.Now().UTC().Format("2006#01#02#03#04#05UTC"), "#", "", -1)
-	uniqueName := fmt.Sprintf("%s-%s-%s", captureName, nodeHostname, formatedUTCTime)
+func (ncpc *NetworkCaptureProviderCommon) CaptureNodetimestampName(captureName string, nodeHostname string, requestTime string) string {
+	uniqueName := fmt.Sprintf("%s-%s-%s", captureName, nodeHostname, requestTime)
 	return uniqueName
 }
 
@@ -30,8 +27,8 @@ type NetworkCaptureProviderCommon struct {
 	l             *log.ZapLogger
 }
 
-func (ncpc *NetworkCaptureProviderCommon) Setup(captureName, nodeHostname string) (string, error) {
-	captureFolderName := ncpc.CaptureNodetimestampName(captureName, nodeHostname)
+func (ncpc *NetworkCaptureProviderCommon) Setup(captureName, nodeHostname, requestTime string) (string, error) {
+	captureFolderName := ncpc.CaptureNodetimestampName(captureName, nodeHostname, requestTime)
 	captureFolderDir := filepath.Join(os.TempDir(), captureFolderName)
 	err := os.MkdirAll(captureFolderDir, 0o750)
 	if err != nil {

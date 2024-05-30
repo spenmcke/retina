@@ -26,4 +26,6 @@ const (
 	NetshFilterEnvKey      string = "NETSH_FILTER"
 
 	ApiserverEnvKey = "APISERVER"
+
+	CaptureRequestTimeEnvKey string = "CAPTURE_REQUEST_TIME"
 )
