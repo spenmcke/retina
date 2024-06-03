@@ -62,7 +62,7 @@ func (cm *CaptureManager) CaptureNetwork(sigChan <-chan os.Signal) (string, erro
 		return "", err
 	}
 
-	if err := cm.networkCaptureProvider.CaptureNetworkPacket(captureFilter, captureDuration, captureMaxSizeMB, sigChan); err != nil {
+	if err := cm.networkCaptureProvider.CaptureNetworkPacket(captureFilter, captureDuration, captureMaxSizeMB, sigChan, captureRequestTime); err != nil {
 		return "", err
 	}
 
