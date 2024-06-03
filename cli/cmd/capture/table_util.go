@@ -109,7 +109,7 @@ func printCaptureResult(captureJobs []batchv1.Job) {
 func printCaptureNames(captureJobs []batchv1.Job) {
 	// capture name
 	// node hostname
-	var com := {"kubectl", "--namespace", namespace, "--selector", nodeSelectors, "|", "grep", "-F", strings.Replace(nodeNames, ",", " ", -1)}
+	var com := {"kubectl", "get", "nodes", "--namespace", namespace, "--selector", nodeSelectors, "|", "grep", "-F", strings.Replace(nodeNames, ",", " ", -1)}
 	exec.Command()
 	// timestamp
 	for _, job := range captureJobs {
