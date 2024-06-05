@@ -58,7 +58,7 @@ func (ir *InfinibandReader) readAndUpdate() error {
 }
 
 func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
-	ir.l.Info("Start ReadCounterStatsv2")
+	ir.l.Info("Start ReadCounterStatsv3")
 	ir.l.Error("Test Error")
 	devices, err := fs.ReadDir(fsys, path)
 	if err != nil {
@@ -84,6 +84,7 @@ func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
 			}
 			for _, counter := range counters {
 				counterPath := filepath.Join(countersPath, counter.Name())
+				ir.l.Info(counterPath)
 				val, err := fs.ReadFile(fsys, counterPath)
 				if err != nil {
 					ir.l.Error("Error while reading infiniband file: \n", zap.Error(err))
