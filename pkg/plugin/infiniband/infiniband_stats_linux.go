@@ -20,8 +20,8 @@ const (
 )
 
 const (
-	InfinibandDevicePrefix = "mlx5_ib"
-	InfinibandIfacePrefix  = "ib"
+	InfinibandDevicePrefix = "mlx5_"
+	InfinibandIfacePrefix  = "eth" // TODO: ib* target iface
 )
 
 func NewInfinibandReader() *InfinibandReader {
