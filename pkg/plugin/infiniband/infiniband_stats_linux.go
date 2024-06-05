@@ -70,6 +70,7 @@ func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
 			continue
 		}
 		portsPath := filepath.Join(path, device.Name(), "ports")
+		ir.l.Info("p1:" + portsPath)
 		ports, err := fs.ReadDir(fsys, portsPath) // does the real filesystem c
 		if err != nil {
 			ir.l.Error("error reading dir:", zap.Error(err))
@@ -77,6 +78,7 @@ func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
 		}
 		for _, port := range ports {
 			countersPath := filepath.Join(portsPath, port.Name(), "counters")
+			ir.l.Info("t1:" + countersPath)
 			counters, err := fs.ReadDir(fsys, countersPath)
 			if err != nil {
 				ir.l.Error("error reading dir:", zap.Error(err))
