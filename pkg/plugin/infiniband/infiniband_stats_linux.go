@@ -40,10 +40,10 @@ type InfinibandReader struct { // nolint // clearer naming
 
 func (ir *InfinibandReader) readAndUpdate() error {
 	ibFS := os.DirFS(pathInfiniband)
-	counterStatsErr := ir.readCounterStats(ibFS, pathInfiniband)
+	counterStatsErr := ir.readCounterStats(ibFS, ".")
 
 	netFS := os.DirFS(pathDebugStatusParameters)
-	statusParamStatsErr := ir.readStatusParamStats(netFS, pathDebugStatusParameters)
+	statusParamStatsErr := ir.readStatusParamStats(netFS, ".")
 
 	ir.updateMetrics()
 	ir.l.Debug("Done reading and updating stats")
