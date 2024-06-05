@@ -39,6 +39,7 @@ type InfinibandReader struct { // nolint // clearer naming
 }
 
 func (ir *InfinibandReader) readAndUpdate() error {
+	ir.l.Info("Start reading stats")
 	ibFS := os.DirFS(pathInfiniband)
 	counterStatsErr := ir.readCounterStats(ibFS, ".")
 
@@ -57,6 +58,7 @@ func (ir *InfinibandReader) readAndUpdate() error {
 }
 
 func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
+	ir.l.Info("Start ReadCounterStats")
 	devices, err := fs.ReadDir(fsys, path)
 	if err != nil {
 		ir.l.Error("error reading dir:", zap.Error(err))
