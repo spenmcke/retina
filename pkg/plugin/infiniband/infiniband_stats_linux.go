@@ -59,6 +59,7 @@ func (ir *InfinibandReader) readAndUpdate() error {
 
 func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
 	ir.l.Info("Start ReadCounterStats")
+	ir.l.Error("Test Error")
 	devices, err := fs.ReadDir(fsys, path)
 	if err != nil {
 		ir.l.Error("error reading dir:", zap.Error(err))
@@ -94,6 +95,7 @@ func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
 					continue // nolint std. fmt.
 				}
 				ir.counterStats[CounterStat{Name: counter.Name(), Device: device.Name(), Port: port.Name()}] = num
+				ir.l.Info("metric: " + counter.Name() + " " + device.Name() + " " + port.Name() + " " + strconv.Itoa(int(num)))
 			}
 
 		}
