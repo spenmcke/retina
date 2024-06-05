@@ -10,7 +10,7 @@ os:
 operator:
   enabled: false
   repository: ghcr.io/spenmcke/retina/retina-operator
-  tag: "v0.0.0"
+  tag: "v0.0.1"
   installCRDs: true
   enableRetinaEndpoint: false
   capture:
@@ -29,7 +29,7 @@ image:
   initRepository: ghcr.io/spenmcke/retina/retina-init
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "v0.0.0"
+  tag: "v0.0.1"
 
 enablePodLevel: false
 remoteContext: false
