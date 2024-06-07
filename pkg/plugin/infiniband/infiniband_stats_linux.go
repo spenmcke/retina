@@ -72,7 +72,6 @@ func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
 		}
 		portsPath := filepath.Join(path, device.Name(), "ports")
 		ir.l.Info("p1:" + portsPath)
-
 		ports, err := fs.ReadDir(fsys, portsPath)
 		if err != nil {
 			ir.l.Error("error reading dir:", zap.Error(err))
@@ -85,9 +84,11 @@ func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
 
 			tests, err := fs.ReadDir(fsys, "mlx5_0/ports/1/counters")
 			if err != nil {
-				fmt.Println(err)
+				ir.l.Error("error reading dir:", zap.Error(err))
 			}
-			fmt.Sprintf("hardcode test: %#v", tests)
+			ir.l.Info(fmt.Sprintf("hardcode test: %#v", tests))
+
+			counters, err := fs.ReadDir(fsys, countersPath)
 
 			if err != nil {
 				ir.l.Error("error reading dir:", zap.Error(err))
