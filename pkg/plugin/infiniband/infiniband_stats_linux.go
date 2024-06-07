@@ -3,6 +3,7 @@
 package infiniband
 
 import (
+	"fmt"
 	"io/fs"
 	"os"
 	"path/filepath"
@@ -58,7 +59,7 @@ func (ir *InfinibandReader) readAndUpdate() error {
 }
 
 func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
-	ir.l.Info("Start ReadCounterStatsv5")
+	ir.l.Info("Start ReadCounterStatsv6")
 	ir.l.Error("Test Error")
 	devices, err := fs.ReadDir(fsys, path)
 	if err != nil {
@@ -86,6 +87,7 @@ func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
 			}
 			for _, counter := range counters {
 				counterPath := filepath.Join(countersPath, counter.Name())
+				ir.l.Info("fs: " + fmt.Sprintf("%#v", fsys))
 				ir.l.Info(counterPath)
 				val, err := fs.ReadFile(fsys, counterPath)
 				if err != nil {
