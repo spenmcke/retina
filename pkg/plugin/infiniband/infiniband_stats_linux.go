@@ -59,7 +59,7 @@ func (ir *InfinibandReader) readAndUpdate() error {
 }
 
 func (ir *InfinibandReader) readCounterStats(fsys fs.FS, path string) error {
-	ir.l.Info("Start ReadCounterStatsv6")
+	ir.l.Info("Start ReadCounterStatsv7")
 	ir.l.Error("Test Error")
 	devices, err := fs.ReadDir(fsys, path)
 	if err != nil {
